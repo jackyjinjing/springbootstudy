@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.jinjing.springboot.springbootstudy.SpringbootstudyApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 3.237 s <<< FAILURE! - in com.jinjing.springboot.springbootstudy.SpringbootstudyApplicationTests
+contextLoads(com.jinjing.springboot.springbootstudy.SpringbootstudyApplicationTests)  Time elapsed: 0.004 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.alibaba.dubbo.spring.boot.DubboProviderAutoConfiguration': Invocation of init method failed; nested exception is com.alibaba.dubbo.rpc.RpcException: Fail to start server(url: dubbo://172.17.20.104:20880/com.jinjing.springboot.springbootstudy.api.HelloService?anyhost=true&application=springbootstudy&bind.ip=172.17.20.104&bind.port=20880&channel.readonly.sent=true&codec=dubbo&dubbo=2.6.0&generic=false&heartbeat=60000&interface=com.jinjing.springboot.springbootstudy.api.HelloService&methods=sayHello&pid=63104&side=provider&timestamp=1550127458382) Failed to bind NettyServer on /172.17.20.104:20880, cause: Failed to bind to: /0.0.0.0:20880
+Caused by: com.alibaba.dubbo.rpc.RpcException: Fail to start server(url: dubbo://172.17.20.104:20880/com.jinjing.springboot.springbootstudy.api.HelloService?anyhost=true&application=springbootstudy&bind.ip=172.17.20.104&bind.port=20880&channel.readonly.sent=true&codec=dubbo&dubbo=2.6.0&generic=false&heartbeat=60000&interface=com.jinjing.springboot.springbootstudy.api.HelloService&methods=sayHello&pid=63104&side=provider&timestamp=1550127458382) Failed to bind NettyServer on /172.17.20.104:20880, cause: Failed to bind to: /0.0.0.0:20880
+Caused by: com.alibaba.dubbo.remoting.RemotingException: Failed to bind NettyServer on /172.17.20.104:20880, cause: Failed to bind to: /0.0.0.0:20880
+Caused by: org.jboss.netty.channel.ChannelException: Failed to bind to: /0.0.0.0:20880
+Caused by: java.net.BindException: Address already in use
+
