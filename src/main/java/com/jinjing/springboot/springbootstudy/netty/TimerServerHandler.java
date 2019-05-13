@@ -20,8 +20,13 @@ public class TimerServerHandler extends ChannelInboundHandlerAdapter {
         buffer.readBytes(req);
         String body = new String(req,"UTF-8");
         System.out.println("received req:"+body);
-        ByteBuf response = Unpooled.copiedBuffer(new Date().toString().getBytes());
-        ctx.write(response);
+        if(body.equalsIgnoreCase("query time")){
+            ByteBuf response = Unpooled.copiedBuffer(new Date().toString().getBytes());
+            ctx.write(response);
+        }else {
+            ByteBuf response = Unpooled.copiedBuffer("bad request".getBytes());
+            ctx.write(response);
+        }
     }
 
     @Override

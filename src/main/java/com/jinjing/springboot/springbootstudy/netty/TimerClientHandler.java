@@ -1,5 +1,6 @@
 package com.jinjing.springboot.springbootstudy.netty;
 
+import com.alibaba.fastjson.JSON;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
@@ -16,13 +17,15 @@ public class TimerClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     public TimerClientHandler() {
         byte[] req = "query time".getBytes();
-        msg = Unpooled.buffer(req.length);
-        msg.writeBytes(msg);
+        msg = Unpooled.copiedBuffer(req);
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        ctx.writeAndFlush(msg);
+        System.out.println("send msg");
+        for (int i = 0; i < 100; i++) {
+            ctx.writeAndFlush(msg);
+        }
     }
 
     @Override
@@ -35,6 +38,7 @@ public class TimerClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        System.out.println("error,"+JSON.toJSONString(cause));
         ctx.close();
     }
 }

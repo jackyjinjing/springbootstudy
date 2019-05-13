@@ -1,16 +1,23 @@
 package com.jinjing.springboot.springbootstudy.netty;
 
 
+import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
+import java.util.Date;
+
 public class NettyServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("server channelRead...; received:" + msg);
-        ctx.write(msg);
+        ByteBuf byteBuf = (ByteBuf) msg;
+        byte[] bytes = new byte[byteBuf.readableBytes()];
+        byteBuf.readBytes(bytes);
+        String req = new String(bytes,"UTF-8");
+        System.out.println("server channelRead...; received:" + req);
+        ctx.write(Unpooled.copiedBuffer(new Date().toString().getBytes()));
     }
 
     @Override
